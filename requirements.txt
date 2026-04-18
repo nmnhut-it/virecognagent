@@ -1,0 +1,37 @@
+# Core ML
+torch>=2.1.0
+torchvision>=0.16.0
+transformers>=4.50.0
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+
+# OCR engines
+paddleocr>=2.9.0
+paddlepaddle>=2.6.0
+vietocr>=0.3.5
+
+# Datasets
+datasets>=2.18.0
+huggingface_hub>=0.20.0
+
+# Image processing
+opencv-python>=4.9.0
+Pillow>=10.0.0
+scikit-image>=0.22.0
+deskew>=1.5.0
+
+# Evaluation
+jiwer>=3.0.0
+editdistance>=0.8.0
+
+# Orchestration
+langgraph>=0.2.0
+langchain-core>=0.3.0
+
+# Utilities
+tqdm>=4.65.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.13.0
+pyyaml>=6.0
+gdown>=5.0.0

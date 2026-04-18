@@ -1,0 +1,76 @@
+# ViRecognAgent Configuration
+# ============================
+
+# Model settings
+model:
+  gemma:
+    name: "google/gemma-4-E4B-it"
+    quantization: "4bit"  # 4bit, 8bit, or none
+    visual_token_budget: 1120  # 70, 140, 280, 560, 1120
+    max_new_tokens: 512
+  vietocr:
+    config_name: "vgg_transformer"
+    device: "cuda"
+
+# Detection settings (PaddleOCR)
+detection:
+  det_db_thresh: 0.2
+  det_db_box_thresh: 0.3
+  det_db_unclip_ratio: 2.0
+  det_db_score_mode: "slow"
+  use_angle_cls: true
+
+# Preprocessing
+preprocessing:
+  target_height: 192  # higher than default 128 for diacritic preservation
+  clahe_clip_limit: 2.0
+  clahe_grid_size: [8, 8]
+  deskew: true
+  denoise: true
+
+# Confidence gating
+confidence:
+  high_threshold: 0.85
+  low_threshold: 0.60
+  method: "self_consistency"  # logprob, self_consistency, heuristic
+  self_consistency_n: 3
+  self_consistency_temperature: 0.3
+
+# Agent Pod settings
+agent_pod:
+  max_rounds: 2
+  anti_hallucination:
+    max_edit_distance_ratio: 0.3  # reject if edit distance > 30% of text length
+    max_word_count_change: 0.1    # reject if word count changes > 10%
+  proposer:
+    thinking: true
+    visual_token_budget: 1120
+  linguist:
+    thinking: true
+    use_vision: false
+  judge:
+    thinking: true
+    visual_token_budget: 1120
+
+# Evaluation
+evaluation:
+  metrics: ["cer", "wer", "der"]
+  diacritic_chars: "àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ"
+  tone_marks: "àáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệìíỉĩịòóỏõọồốổỗộờớởỡợùúủũụừứửữựỳýỷỹỵ"
+  vowel_modifiers: "ăâêôơưđ"
+
+# Datasets
+datasets:
+  viet_handwriting:
+    name: "5CD-AI/Viet-Handwriting-OCR"
+    split_ratio: [0.8, 0.1, 0.1]  # train/val/test
+  cinnamon:
+    gdrive_folder: "1Qa2YA6w6V5MaNV-qxqZwlkPsJ5lEBajc"
+
+# Experiment settings
+experiment:
+  seed: 42
+  batch_size: 1  # sequential for agent-based processing
+  num_workers: 4
+  output_dir: "outputs"
+  log_dir: "logs"

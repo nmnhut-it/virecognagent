@@ -1,0 +1,44 @@
+# Data
+data/
+outputs/
+logs/
+*.csv
+*.json
+!configs/*.yaml
+!configs/*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Models
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+env/
+venv/
