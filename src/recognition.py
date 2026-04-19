@@ -535,16 +535,30 @@ class Gemma4Recognizer:
         return messages
 
     def _generate(self, messages: list[dict], max_new_tokens: int = 512) -> str:
-        """Generate text from messages."""
+        """Generate text from messages.
+
+        Uses two-step processor call (apply_chat_template then processor(text, images=...))
+        so that image content in messages actually reaches the model — the single-call
+        tokenize=True path drops images silently on Gemma 4.
+        """
         import torch
 
-        inputs = self.processor.apply_chat_template(
-            messages,
-            add_generation_prompt=True,
-            tokenize=True,
-            return_dict=True,
-            return_tensors="pt",
-        ).to(self.model.device)
+        text = self.processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+
+        images = []
+        for m in messages:
+            content = m.get("content")
+            if isinstance(content, list):
+                for c in content:
+                    if isinstance(c, dict) and c.get("type") == "image" and "image" in c:
+                        images.append(c["image"])
+
+        proc_kwargs = {"text": [text], "return_tensors": "pt"}
+        if images:
+            proc_kwargs["images"] = images
+        inputs = self.processor(**proc_kwargs).to(self.model.device)
 
         with torch.no_grad():
             output_ids = self.model.generate(
