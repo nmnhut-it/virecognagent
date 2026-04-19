@@ -523,7 +523,7 @@ class Gemma4Recognizer:
         if thinking:
             system_content = "<|think|>\n" + system_content
 
-        messages = [{"role": "system", "content": system_content}]
+        messages = [{"role": "system", "content": [{"type": "text", "text": system_content}]}]
 
         # User message with optional image
         user_content = []
