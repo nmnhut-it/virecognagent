@@ -50,7 +50,8 @@ scripts/
   run_experiments.py   # Runs all baselines + ablations + sweeps
 
 notebooks/
-  ViRecognAgent_Pipeline.ipynb  # Main Colab notebook
+  PaddleOCR_VietWiki.ipynb      # Simple baseline: stock PaddleOCR on Viet-Wiki-Handwriting
+  ViRecognAgent_Pipeline.ipynb  # Main Colab notebook (full multi-agent pipeline)
 
 configs/
   default.yaml         # All configuration parameters

@@ -22,7 +22,12 @@ Image → Preprocess (OpenCV)
 ## Quick Start
 
 ### Option 1: Google Colab (Recommended)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/virecognagent/blob/main/notebooks/ViRecognAgent_Pipeline.ipynb)
+
+**Simple baseline** — PaddleOCR (stock) on 5CD-AI/Viet-Wiki-Handwriting:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nmnhut-it/virecognagent/blob/main/notebooks/PaddleOCR_VietWiki.ipynb)
+
+**Full pipeline** — multi-agent Gemma 4:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nmnhut-it/virecognagent/blob/main/notebooks/ViRecognAgent_Pipeline.ipynb)
 
 ### Option 2: Local Setup
 ```bash
@@ -38,6 +43,7 @@ python scripts/run_pipeline.py --threshold 0.85 --max-rounds 2
 
 | Dataset | Size | Type | Access |
 |---------|------|------|--------|
+| **5CD-AI/Viet-Wiki-Handwriting** | 5,796 paragraphs (800 px) | Wiki text in handwritten fonts | [HuggingFace](https://huggingface.co/datasets/5CD-AI/Viet-Wiki-Handwriting) (gated) |
 | **5CD-AI/Viet-Handwriting-OCR** | 23,403 images | Diverse handwriting | [HuggingFace](https://huggingface.co/datasets/5CD-AI/Viet-Handwriting-OCR) |
 | **Cinnamon AI Marathon** | 1,838 images | Handwritten addresses | [Google Drive](https://drive.google.com/drive/folders/1Qa2YA6w6V5MaNV-qxqZwlkPsJ5lEBajc) |
 | **HANDS-VNOnDB** | 7,296 lines | Online handwriting | [Request access](https://sites.google.com/view/icfhr2018-vohtr-vnondb/database-tools) |
